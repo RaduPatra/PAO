@@ -1,5 +1,10 @@
 package pack.radu.services;
 
+import pack.radu.repository.AdminRepository;
+import pack.radu.repository.ClientRepository;
+import pack.radu.repository.LaptopRepository;
+import pack.radu.repository.PhoneRepository;
+import pack.radu.users.Admin;
 import pack.radu.users.Client;
 import pack.radu.Shop;
 import pack.radu.items.Device;
@@ -11,10 +16,12 @@ import java.util.Scanner;
 
 public class ShopService {
 
-    private Shop shop;
     private static ShopService shopService = null;
+    private final PhoneRepository phoneRepository = PhoneRepository.getInstance();
+    private final LaptopRepository laptopRepository = LaptopRepository.getInstance();
+    private Shop shop;
     private UserService myUserService;
-    WriteService myWriteService;
+    private WriteService myWriteService;
 
     private ShopService() {
         shop = Shop.getInstance();
@@ -122,6 +129,7 @@ public class ShopService {
                 System.out.println("Enter laptop gpu type: ");
                 String gputype = sc2.nextLine();
                 newdevice = new Laptop(brand, deviceid, price, storage, ram, storagetype, gputype);
+                saveLaptop(brand, deviceid, price, storage, ram, storagetype, gputype);
                 break;
 
             case 2:
@@ -130,6 +138,7 @@ public class ShopService {
                 System.out.println("Enter phone camera mega pixels: ");
                 int cameramp = sc2.nextInt();
                 newdevice = new Phone(brand, deviceid, price, storage, ram, batterylife, cameramp);
+                savePhone(brand, deviceid, price, storage, ram, batterylife, cameramp);
                 break;
 
             default:
@@ -199,6 +208,32 @@ public class ShopService {
         shop.getLaptops().add(laptop);
         shop.getDeviceMap().put(laptop.getDeviceID(), laptop);
         myWriteService.writeLogsToFile("Added laptop to shop");
+    }
+
+    public Phone savePhone(String brand, int deviceid, int price, int storage, int ram, int batterylife, int cameramp) {
+        Phone phone = new Phone(brand, deviceid, price, storage, ram, batterylife, cameramp);
+        return phoneRepository.savePhone(phone);
+    }
+
+    public Phone findPhone(int id) {
+        return phoneRepository.findPhone(id);
+    }
+
+    public Laptop saveLaptop(String brand, int deviceid, int price, int storage, int ram, String storagetpye, String gputype) {
+        Laptop phone = new Laptop(brand, deviceid, price, storage, ram, storagetpye, gputype);
+        return laptopRepository.saveLaptop(phone);
+    }
+
+    public Laptop findLaptop(int id) {
+        return laptopRepository.findLaptop(id);
+    }
+
+    public void updatePhone(int id, int price) {
+        phoneRepository.updatePhone(id, price);
+    }
+
+    public void updateLaptop(int id, int price) {
+        laptopRepository.updateLaptop(id, price);
     }
 
     public Shop getShop() {

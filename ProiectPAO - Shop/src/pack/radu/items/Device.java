@@ -18,6 +18,10 @@ public abstract class Device {
         this.ram = ram;
     }
 
+    public Device() {
+
+    }
+
     @Override
     public String toString() {
         return "Brand: " + this.brand + ", Device ID: " + this.deviceID + ", Price: " +

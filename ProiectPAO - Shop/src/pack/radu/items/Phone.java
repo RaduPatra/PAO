@@ -11,6 +11,10 @@ public class Phone extends Device {
         this.cameraMP = cameraMP;
     }
 
+    public Phone() {
+        super();
+    }
+
     @Override
     public String toString() {
         return super.toString() + ",Battery life: " + batterylife + ", Camera MegaPixels: " + cameraMP + " ";

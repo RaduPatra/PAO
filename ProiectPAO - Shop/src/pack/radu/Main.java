@@ -1,7 +1,10 @@
 package pack.radu;
 
 import pack.radu.items.*;
+import pack.radu.users.*;
 import pack.radu.services.*;
+import pack.radu.connection.*;
+import pack.radu.repository.*;
 
 import java.util.*;
 
@@ -83,6 +86,60 @@ public class Main {
                     System.out.println("Calculate price by parts: ");
                     Device device = myShopService.pickItemFromShop();
                     System.out.println(device.calculatePrice());
+                    break;
+
+                case 11:
+                    System.out.print("Client Id = ");
+                    clientid = sc.nextInt();
+                    System.out.print(myUserService.findClient(clientid));
+                    break;
+                case 12:
+                    System.out.print("Admin Id = ");
+                    adminid = sc.nextInt();
+                    System.out.print(myUserService.findAdmin(adminid));
+                    break;
+                case 13:
+                    System.out.print("Phone Id = ");
+                    int phoneid = sc.nextInt();
+                    System.out.print(myShopService.findPhone(phoneid));
+                    break;
+                case 14:
+                    System.out.print("Laptop Id = ");
+                    int laptopid = sc.nextInt();
+                    System.out.print(myShopService.findLaptop(laptopid));
+                    break;
+
+                case 15:
+                    System.out.print("Admin Id = ");
+                    adminid = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Admin new name = ");
+                    String newname = sc.nextLine();
+                    myUserService.updateAdmin(adminid, newname);
+                    break;
+                case 16:
+                    System.out.print("Client Id = ");
+                    clientid = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Client new name = ");
+                    newname = sc.nextLine();
+                    myUserService.updateClient(clientid, newname);
+                    break;
+                case 17:
+                    System.out.print("Phone Id = ");
+                    phoneid = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Phone new price = ");
+                    int newprice = sc.nextInt();
+                    myShopService.updatePhone(phoneid, newprice);
+                    break;
+                case 18:
+                    System.out.print("Laptop Id = ");
+                    laptopid = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Laptop new price = ");
+                    newprice = sc.nextInt();
+                    myShopService.updateLaptop(laptopid, newprice);
                     break;
 
                 case 0:

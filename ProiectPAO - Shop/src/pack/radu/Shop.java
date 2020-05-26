@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Shop {
+    private static Shop shop = null;
     private ArrayList<Laptop> laptops = new ArrayList<>();
     private ArrayList<Phone> phones = new ArrayList<>();
     private HashMap<Integer, Device> deviceMap = new HashMap<>();
-    private static Shop shop = null;
 
     public static Shop getInstance()
     {

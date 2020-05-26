@@ -6,8 +6,13 @@ public class Admin extends User {
         super(name, id);
     }
 
+    public Admin() {
+        super();
+    }
+
     @Override
     public String toString() {
         return super.toString();
     }
 }
+

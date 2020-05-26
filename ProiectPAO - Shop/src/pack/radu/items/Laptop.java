@@ -13,6 +13,10 @@ public class Laptop extends Device {
         this.gputype = gputype;
     }
 
+    public Laptop() {
+        super();
+    }
+
     @Override
     public String toString() {
         return super.toString() + ",Storage type: " + storagetype + ", Gpu Type: " + gputype + " ";

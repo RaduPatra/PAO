@@ -9,9 +9,9 @@ import java.io.*;
 public class ReadService implements FileLocations {
 
     private static ReadService readService = null;
-    UserService myUserService;
-    ShopService myShopService;
-    WriteService myWriteService;
+    private UserService myUserService;
+    private ShopService myShopService;
+    private WriteService myWriteService;
 
     private ReadService(){
         myUserService = UserService.getInstance();

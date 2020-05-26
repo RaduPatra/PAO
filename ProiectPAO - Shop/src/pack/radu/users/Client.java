@@ -10,6 +10,11 @@ public class Client extends User implements Comparable<Client> {
     private double discount;
     public ArrayList<Device> inventory = new ArrayList<>();
 
+
+    public Client() {
+        super();
+    }
+
     public Client(String name, int id, int balance, double discount) {
         super(name, id);
         this.discount = discount;
@@ -23,7 +28,7 @@ public class Client extends User implements Comparable<Client> {
 
     public double getDiscount() {
         return discount;
-    }//!!
+    }
 
     public void setDiscount(double discount) {
         this.discount = discount;
@@ -44,7 +49,12 @@ public class Client extends User implements Comparable<Client> {
     @Override
     public int compareTo(Client comparesto) {
         int comparebal = comparesto.getBalance();
-        //return Float.compare(comparebal - this.balance, 0.0f);
         return comparebal - this.balance;
     }
+
+    public void setInventory(ArrayList<Device> inventory) {
+        this.inventory = inventory;
+    }
+
+
 }

@@ -56,7 +56,5 @@ public class WriteService implements FileLocations {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }

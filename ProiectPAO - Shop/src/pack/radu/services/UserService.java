@@ -8,9 +8,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import pack.radu.repository.*;
+
 public class UserService {
 
     private static UserService userService = null;
+    private final ClientRepository clientRepository = ClientRepository.getInstance();
+    private final AdminRepository adminRepository = AdminRepository.getInstance();
     private ArrayList<Client> clients;
     private ArrayList<Admin> admins;
     private HashMap<Integer, Client> clientMap;
@@ -39,12 +43,15 @@ public class UserService {
         int id = sc.nextInt();
         System.out.println("Enter client balance: ");
         int balance = sc.nextInt();
-        Client newclient = new Client(name, id, balance, 1);
+        int discount = 1;
+        Client newclient = new Client(name, id, balance, discount);
 
         clients.add(newclient);
         clientMap.put(id, newclient);
         System.out.println("Added: " + newclient);
         myWriteService.writeLogsToFile("Added new client");
+        Client clientToSave = saveClient(name, id, balance, discount);
+        System.out.println(clientToSave);
     }
 
     public void addAdmin() {
@@ -59,6 +66,8 @@ public class UserService {
         adminMap.put(id, newadmin);
         System.out.println("Added: " + newadmin);
         myWriteService.writeLogsToFile("Added new admin");
+        Admin adminToSave = saveAdmin(name, id);
+        System.out.println(adminToSave);
     }
 
     public void sortAndDisplayClients() {
@@ -108,6 +117,33 @@ public class UserService {
         adminMap.put(admin.getId(), admin);
         myWriteService.writeLogsToFile("Add admin to list");
     }
+
+    public Client saveClient(String name, int id, int balance, double discount) {
+        Client client = new Client(name, id, balance, discount);
+        return clientRepository.saveClient(client);
+    }
+
+    public Admin saveAdmin(String name, int id) {
+        Admin admin = new Admin(name, id);
+        return adminRepository.saveAdmin(admin);
+    }
+
+    public Client findClient(int id) {
+        return clientRepository.findClient(id);
+    }
+
+    public Admin findAdmin(int id) {
+        return adminRepository.findAdmin(id);
+    }
+
+    public void updateAdmin(int id, String name) {
+        adminRepository.updateAdmin(id, name);
+    }
+
+    public void updateClient(int id, String name) {
+        clientRepository.updateClient(id, name);
+    }
+
 
     public ArrayList<Client> getClients() {
         return clients;

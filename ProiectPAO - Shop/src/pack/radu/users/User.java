@@ -9,6 +9,10 @@ public abstract class User{
         this.id = id;
     }
 
+    public User() {
+
+    }
+
     @Override
     public String toString()
     {
@@ -30,5 +34,7 @@ public abstract class User{
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
 
